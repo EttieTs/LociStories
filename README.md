@@ -1,5 +1,5 @@
 # LociStories
-The code for Loci/Stories installation exhibited with the National Trust at Seaton Delaval Hall. The installations is a prototype for a PhD project.
+The code for Loci/Stories installation exhibited with the National Trust at Seaton Delaval Hall, summer 2021. The installations is a prototype for a PhD project.
 
 The code networks three machines that play video and audio content, triggered by voice interaction. 
 
