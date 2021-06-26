@@ -1,26 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
 using System;
-using System.Collections;
 using System.Runtime.InteropServices;
+
+// Atti's solution from - https://answers.unity.com/questions/37416/how-can-i-bring-to-front-a-window-called-by-an-scr.html
 
 public class Foregrounder : MonoBehaviour
 {
-    private const uint LOCK = 1;
-    private const uint UNLOCK = 2;
+    private const uint LSFW_LOCK = 1;
+    private const uint LSFW_UNLOCK = 2;
 
     private IntPtr window;
 
     void Start()
     {
-        LockSetForegroundWindow(LOCK);
+        LockSetForegroundWindow(LSFW_LOCK);
         window = GetActiveWindow();
-        StartCoroutine(Checker());
+        StartCoroutine(AsyncChecker());
     }
 
-    IEnumerator Checker()
+    IEnumerator AsyncChecker()
     {
         while (true)
         {

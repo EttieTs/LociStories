@@ -38,6 +38,10 @@ public class EtVoiceRecognition : MonoBehaviour
 
     int playVideo = -1;
 
+    // For version text
+    Text version;
+    DateTime startTime;
+
     private string[] m_Keywords = new String[] { KeyWord_Morning,
                                                  KeyWord_Discovery,
                                                  KeyWord_Fire,
@@ -65,12 +69,13 @@ public class EtVoiceRecognition : MonoBehaviour
         videoPlayer.isLooping = false;
         videoPlayer.loopPointReached += EndReached;
         videoPlayer.renderMode = VideoRenderMode.CameraFarPlane;
+        videoPlayer.waitForFirstFrame = false;
     }
 
     void Start()
     {
         Debug.Log("Waiting for voice command");
-        
+
         thisMachineName = BWNetworking.GetDeviceName();
 
         // Make sure our sound never loops
@@ -84,6 +89,7 @@ public class EtVoiceRecognition : MonoBehaviour
         menuVideoPlayer.targetCamera = GetComponent<Camera>();
         menuVideoPlayer.isLooping = true;
         menuVideoPlayer.renderMode = VideoRenderMode.CameraFarPlane;
+        menuVideoPlayer.waitForFirstFrame = false;
 
         if (thisMachineName == BWNetworking.machineNameAB)
         {
@@ -124,7 +130,11 @@ public class EtVoiceRecognition : MonoBehaviour
         EtLog.Log("Machine 1:" + BWNetworking.machineNameAB);
         EtLog.Log("Machine 2:" + BWNetworking.machineNameCD);
         EtLog.Log("Machine 3:" + BWNetworking.machineNameEF);
-        EtLog.Log("This machine:" + BWNetworking.GetDeviceName() );
+        EtLog.Log("This machine:" + BWNetworking.GetDeviceName());
+
+        version = GameObject.Find("Version").GetComponent<Text>();
+        version.text = Application.version;
+        startTime = DateTime.Now;
     }
 
     //VIDEO AND SOUND SETUP FOR KEYWORDS
@@ -333,6 +343,16 @@ public class EtVoiceRecognition : MonoBehaviour
 
     public void Update()
     {
+        // Hide the version after ten seconds
+        if (version.enabled)
+        {
+            TimeSpan howLong = DateTime.Now - startTime;
+            if (howLong.Seconds > 10)
+            {
+                version.enabled = false;
+            }
+        }
+
         // Update the networking state
         bool isPlayingSound = backgroundSound.isPlaying;
         bool isPlayingVideo = storyVideoPlayer[0].isPlaying | storyVideoPlayer[1].isPlaying | storyVideoPlayer[2].isPlaying |

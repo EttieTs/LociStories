@@ -32,8 +32,8 @@ public class BWNetworking : MonoBehaviour
 
 #if VIOLETAS_MACHINE_NAMES
     // VIOLETAS SETUP
-    public static string machineNameAB = "DESKTOP-OA33INC"; //Violeta actual PC ->"DESKTOP-P6BB6S7"
-    public static string machineNameCD = "DESKTOP-F5AK0BV"; //DESKTOP-EN2BEG6"
+    public static string machineNameAB = "DESKTOP-F5AK0BV"; //Violeta actual PC ->"DESKTOP-P6BB6S7"
+    public static string machineNameCD = "DESKTOP-OA33INC"; //DESKTOP-EN2BEG6"
     public static string machineNameEF = "DESKTOP-P6BB6S7"; //
 #endif
 
